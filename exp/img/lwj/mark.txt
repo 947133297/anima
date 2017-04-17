@@ -1,0 +1,5 @@
+对象结构：
+    root -> c2 -> c1 -> c3 -> text
+               -> 放大镜图片
+         -> c4 -> jianli
+               -> zhang
