@@ -212,6 +212,7 @@ define(function () {
     }
     return {
         show: show,
-        clear:clear
+        clear:clear,
+        showzimu:showzimu
     };
 });
