@@ -1,10 +1,10 @@
 /**
- * Created by MRLWJ on 2017/4/16.
+ * Created by MRLWJ on 2017/4/16. 第四幕最后一部分
  */
 define(function () {
     var root = new createjs.Container();
     stage.addChild(root);
-    var show = function(){
+    var show = function(del){
         var c4 = new createjs.Container(); //简历以及印章所在容器
         c4.scaleX = c4.scaleY = 0.8;
         root.addChild(c4);
@@ -46,8 +46,8 @@ define(function () {
         c2.scaleX = c2.scaleY = 1.2;
         c2.x = 360;
         c2.y = 300;
-        registerTicker(c2,"x",0,[[0.7,70],[0.7,-70]],5,null,3);
-        registerTicker(c3,"x",0,[[0.7,-70],[0.7,70]],5,null,3);
+        registerTicker(c2,"x",del,[[0.7,70],[0.7,-70]],5,null,3);
+        registerTicker(c3,"x",del,[[0.7,-70],[0.7,70]],5,null,3);
 
         // 盖章逻辑
         var zhang = new createjs.Bitmap('img/lwj/zhang.svg');
@@ -63,7 +63,7 @@ define(function () {
         yinzhang.y = -250;
         root.addChild(yinzhang);
 
-        registerTicker(yinzhang,"y",0,[[1,300]],5,function(){
+        registerTicker(yinzhang,"y",del,[[1,300]],5,function(){
             zhang.visible = true;
             setTimeout(function(){
                 registerTicker(yinzhang,"y",0,[[1,-300]],5,null);
@@ -108,15 +108,15 @@ define(function () {
         //隐藏放大镜
         setTimeout(function(){
             c2.visible = false;
-        },3000);
+        },3000+del);
 
         c4.x = c4.regX = 650;
         c4.y = c4.regY = 300;
 
         //简历飞进电脑中
-        registerTicker(c4,"scaleY",3000,[[0.7,-0.6]],5,null);
-        registerTicker(c4,"scaleX",3000,[[0.7,-0.6]],5,null);
-        registerTicker(c4,"x",3000,[[0.7,550]],5,function(){
+        registerTicker(c4,"scaleY",3000+del,[[0.7,-0.6]],5,null);
+        registerTicker(c4,"scaleX",3000+del,[[0.7,-0.6]],5,null);
+        registerTicker(c4,"x",3000+del,[[0.7,550]],5,function(){
             //鼠标往下移动，点击按钮
             registerTicker(finger,"y",0,[[1,140]],5,function(){
                 setTimeout(function(){
@@ -147,14 +147,14 @@ define(function () {
         cpName.y = -8;
         c6.addChild(cpName);
 
-        registerTicker(c4,"scaleY",6000,[[0.7,-0.19]],5,null);
-        registerTicker(c4,"scaleX",6000,[[0.7,-0.19]],5,null);
-        registerTicker(c4,"x",6000,[[0.7,600]],5,null);
-        registerTicker(c4,"y",6000,[[0.7,-100]],5,null);
+        registerTicker(c4,"scaleY",6000+del,[[0.7,-0.19]],5,null);
+        registerTicker(c4,"scaleX",6000+del,[[0.7,-0.19]],5,null);
+        registerTicker(c4,"x",6000+del,[[0.7,600]],5,null);
+        registerTicker(c4,"y",6000+del,[[0.7,-100]],5,null);
         //registerTicker(c4,"scaleX",4000,[[0.7,-0.1]],5,null);
 
         //播放字幕
-        showzimu(1300,["在酷校，你的培训经历将获得专家认证","你可以拿着简历在酷校上找企业、找工作，成功入职名企，娶到白富美，顺利走上人生巅峰",""],2500);
+        showzimu(1300+del,["在酷校，你的培训经历将获得专家认证","你可以拿着简历在酷校上找企业、找工作，成功入职名企，娶到白富美，顺利走上人生巅峰",""],2500);
 
         //最后logo出现
         //到这里添加到stage中的对象有：root、logo、endBg
@@ -173,7 +173,7 @@ define(function () {
                     registerTicker(logo,"y",0,[[0.1,40]],5,null);
                 });
             });
-        },7000);
+        },7000+del);
 
 
     };
@@ -213,6 +213,7 @@ define(function () {
     return {
         show: show,
         clear:clear,
-        showzimu:showzimu
+        showzimu:showzimu,
+        root:root
     };
 });

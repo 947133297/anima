@@ -1,10 +1,10 @@
 /**
- * Created by MRLWJ on 2017/4/16.
+ * Created by MRLWJ on 2017/4/16. 第四幕第一部分 播放时间10s
  */
 define(['my'],function (my) {
     var root = new createjs.Container();
     stage.addChild(root);
-    var show = function(){
+    var show = function(del){
         var selectContainer = new createjs.Container();
         root.addChild(selectContainer);
 
@@ -44,7 +44,7 @@ define(['my'],function (my) {
         selectContainer.addChild(finger);
         finger.x = 320;
 
-        registerTicker(finger,"y",0,[[0.3,gapHeight]],5, function () { //下移
+        registerTicker(finger,"y",del,[[0.3,gapHeight]],5, function () { //下移
             registerTicker(finger,"y",700,[[0.3,gapHeight]],5, function () { //下移
                 registerTicker(finger,"y",700,[[0.3,-gapHeight]],5, function () {//上移
                     //设置第二个为选中,闪烁效果
@@ -65,7 +65,7 @@ define(['my'],function (my) {
         man.y = 130;
 
         //root.x = -600;
-        registerTicker(root,"x",3500,[[0.5,-600]],5, null);
+        registerTicker(root,"x",3500+del,[[0.5,-600]],5, null);
 
         // 添加右侧的扫描信息文字
         var msgLineGap = 60; //两行之间的高度差
@@ -97,8 +97,8 @@ define(['my'],function (my) {
                     });
                 });
             });
-        },4000);
-        my.showzimu(1800,["当你加入一门在线课程后，酷校会知道你是谁","学习基础怎么样，喜欢什么样的学习方式","酷校会为你量身规划一条自己的学习路线",""],2500);
+        },4000+del);
+        my.showzimu(1000+del,["当你加入一门在线课程后，酷校会知道你是谁","学习基础怎么样，喜欢什么样的学习方式","酷校会为你量身规划一条自己的学习路线",""],2500);
 
         //展现扫描效果
         var scan = new createjs.Bitmap('img/lwj2/scan.svg');
@@ -115,18 +115,38 @@ define(['my'],function (my) {
             scan.visible = scanner.visible = true;
             registerTicker(scan,"y",0,[[1.6,300],[0.2,-300]],5, null,3);
             registerTicker(scanner,"y",0,[[1.6,300],[0.2,-300]],5, null,3);
-        },4000);
+        },4000+del);
 
+
+        //var assetsPath = "audio/lwj2/";
+        //var sounds = [
+        //    {src: "bg.mp3", id: 1},
+        //    {src: "newbg.mp3", id: 2}
+        //];
+        //createjs.Sound.addEventListener("fileload", function(event){
+        //    createjs.Sound.play(event.src);
+        //});
+        //createjs.Sound.registerSounds(sounds, assetsPath);
+
+        //http://cdn.gbtags.com/gblibraryassets/libid108/charactor.png
         //var spritesheet = new createjs.SpriteSheet({
-        //    'images': ['http://cdn.gbtags.com/gblibraryassets/libid108/charactor.png'],
-        //    'frames': {"height": 96, "count": 10, "width": 75}
+        //    'images': ['img/lwj2/toleft145.png'],
+        //    'frames': {"height": 350, "count": 7, "width": 145}
         //});
         //
         //var charactor  = new createjs.Sprite(spritesheet);
-        //charactor.x = (stageWidth - characterWidth)/2;
-        //charactor.y = (stageHeight - characterHeight)/2;
         //charactor.play();
         //stage.addChild(charactor);
+        //
+        //var spritesheet1 = new createjs.SpriteSheet({
+        //    'images': ['img/lwj2/hand.png'],
+        //    'frames': {"height": 282, "count": 7, "width": 287.5}
+        //});
+        //
+        //var charactor1  = new createjs.Sprite(spritesheet1);
+        //charactor1.y = 400;
+        //charactor1.play();
+        //stage.addChild(charactor1);
     };
 
     /**
@@ -188,6 +208,7 @@ define(['my'],function (my) {
     }
     return {
         show: show,
-        clear:clear
+        clear:clear,
+        root:root
     };
 });
